@@ -1,0 +1,19 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Ajouter un tournoi</h2>
+  <form method="post" action="/ajouter-tournoi/">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom du tournoi</label>
+      <input type="text" class="form-control" id="nom" name="nom" required>
+    </div>
+    <div class="mb-3">
+      <label for="sport" class="form-label">Sport</label>
+      <input type="text" class="form-control" id="sport" name="sport" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <a href=".." class="btn btn-secondary">annuler</a>
+  </form>
+</div>
+{% endblock %}

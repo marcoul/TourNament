@@ -1,0 +1,76 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Ajouter un nouveau match</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="team_dom" class="form-label">Équipe domicile</label>
+            <select class="form-select" id="team_dom" name="team_dom">
+                {% for team in teams %}
+                <option value="{{ team.id }}">{{ team.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="team_ext" class="form-label">Équipe extérieure</label>
+            <select class="form-select" id="team_ext" name="team_ext">
+                {% for team in teams %}
+                <option value="{{ team.id }}">{{ team.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="datetime-local" class="form-control" id="date" name="date">
+        </div>
+        <div class="mb-3">
+            <label for="resultat_team_dom" class="form-label">Résultat de l'équipe domicile</label>
+            <input type="number" class="form-control" id="resultat_team_dom" name="resultat_team_dom">
+        </div>
+        <div class="mb-3">
+            <label for="resultat_team_ext" class="form-label">Résultat de l'équipe extérieure</label>
+            <input type="number" class="form-control" id="resultat_team_ext" name="resultat_team_ext">
+        </div>
+        <div class="mb-3">
+            <label for="idTournament" class="form-label">Tournoi</label>
+            <input type="text" class="form-control" id="nomTournament" name="nomTournament" value="{{tournament.nom}}" disabled>
+            <input type="number" class="form-control" id="idTournament" name="idTournament" value="{{ tournament.pk }}" hidden>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <a href=".." class="btn btn-secondary">annuler</a>
+        
+        <!-- Bouton d'ajout d'une nouvelle équipe -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTeamModal">
+          Ajouter une équipe
+        </button>
+    </form>
+  </div>
+  
+  <!-- Fenêtre modale pour ajouter une nouvelle équipe -->
+  <div class="modal fade" id="addTeamModal" tabindex="-1" aria-labelledby="addTeamModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTeamModalLabel">Ajouter une nouvelle équipe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulaire pour ajouter une nouvelle équipe -->
+          <form id="addTeamForm" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="teamName" class="form-label">Nom de l'équipe</label>
+              <input type="text" class="form-control" id="teamName" name="teamName" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" form="addTeamForm" class="btn btn-primary">Ajouter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

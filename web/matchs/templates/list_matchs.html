@@ -1,0 +1,24 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container">
+  <div class="d-flex align-items-center mb-4">
+    <h1 class="me-3">Liste des matchs</h1>
+    <a href="{% url 'add_match' tournament.id %}" class="btn btn-primary">
+      {% load bootstrap_icons %}
+      {% bs_icon 'plus' %}
+    </a>
+  </div>
+    <ul class="list-group">
+        {% for match in matchs %}
+        <li class="list-group-item">
+          <h2>Match: {{ match.team_dom.nom }} vs {{ match.team_ext }}</h2>
+          <p>Date: {{ match.date }}</p>
+          <p>Résultat: {{ match.resultat_team_dom }} - {{ match.resultat_team_ext }}</p>
+          <p>Tournoi: {{ match.idTournament.nom }}</p>
+        </li>
+        {% empty %}
+        <li class="list-group-item">Aucun match disponible pour le moment.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

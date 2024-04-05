@@ -1,0 +1,25 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container">
+  <div class="d-flex align-items-center mb-4">
+    <h1 class="me-3">Liste des tournois</h1>
+    <a href="{% url 'add_tournament' %}" class="btn btn-primary">
+      {% load bootstrap_icons %}
+      {% bs_icon 'plus' %}
+    </a>
+  </div>
+    
+    <ul class="list-group">
+        {% for tournament in tournaments %}
+        <a href="/matchs/{{ tournament.pk }}" class="list-group-item list-group-item-action">
+          <li>
+              <h2>{{ tournament.nom }}</h2>
+              <p>Sport: {{ tournament.sport }}</p>
+          </li>
+        </a>
+        {% empty %}
+        <li class="list-group-item">Aucun tournoi disponible pour le moment.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
