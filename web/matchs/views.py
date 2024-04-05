@@ -37,7 +37,7 @@ def add_team(request):
         form = TeamForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_match')  # Redirigez vers la page d'ajout de match après avoir ajouté l'équipe avec succès
+            return redirect('add_match')
     else:
         form = TeamForm()
     return render(request, 'add_team_modal.html', {'form': form})

@@ -6,7 +6,7 @@
         {% csrf_token %}
         <div class="mb-3">
             <label for="team_dom" class="form-label">Équipe domicile</label>
-            <select class="form-select" id="team_dom" name="team_dom">
+            <select class="form-select" id="team_dom" name="team_dom" required>
                 {% for team in teams %}
                 <option value="{{ team.id }}">{{ team.nom }}</option>
                 {% endfor %}
@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label for="team_ext" class="form-label">Équipe extérieure</label>
-            <select class="form-select" id="team_ext" name="team_ext">
+            <select class="form-select" id="team_ext" name="team_ext" required>
                 {% for team in teams %}
                 <option value="{{ team.id }}">{{ team.nom }}</option>
                 {% endfor %}
@@ -22,15 +22,15 @@
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>
-            <input type="datetime-local" class="form-control" id="date" name="date">
+            <input type="datetime-local" class="form-control" id="date" name="date" required>
         </div>
         <div class="mb-3">
             <label for="resultat_team_dom" class="form-label">Résultat de l'équipe domicile</label>
-            <input type="number" class="form-control" id="resultat_team_dom" name="resultat_team_dom">
+            <input type="number" class="form-control" id="resultat_team_dom" name="resultat_team_dom" required>
         </div>
         <div class="mb-3">
             <label for="resultat_team_ext" class="form-label">Résultat de l'équipe extérieure</label>
-            <input type="number" class="form-control" id="resultat_team_ext" name="resultat_team_ext">
+            <input type="number" class="form-control" id="resultat_team_ext" name="resultat_team_ext" required>
         </div>
         <div class="mb-3">
             <label for="idTournament" class="form-label">Tournoi</label>
@@ -38,9 +38,8 @@
             <input type="number" class="form-control" id="idTournament" name="idTournament" value="{{ tournament.pk }}" hidden>
         </div>
         <button type="submit" class="btn btn-primary">Ajouter</button>
-        <a href=".." class="btn btn-secondary">annuler</a>
-        
-        <!-- Bouton d'ajout d'une nouvelle équipe -->
+        <a href="{% url 'list_matchs' tournament.pk %}" class="btn btn-secondary">annuler</a>
+
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTeamModal">
           Ajouter une équipe
         </button>
