@@ -37,7 +37,7 @@ def add_team(request):
         form = TeamForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_match')
+            return redirect(reverse('add_match', args=[request.POST['idTournament']]))  # Redirection vers 'add_match' avec l'identifiant du tournoi
     else:
         form = TeamForm()
     return render(request, 'add_team_modal.html', {'form': form})
